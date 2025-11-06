@@ -25,10 +25,12 @@ export async function POST(req: NextRequest) {
       "image/svg+xml",
     ];
 
+    const contentType = file.type || "application/octect-stream";
+
     if (!allowedMimeTypes.includes(file.type)) {
       return NextResponse.json(
         { error: "Invalid file type. Only image files are allowed." },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -37,7 +39,7 @@ export async function POST(req: NextRequest) {
     if (file.size > maxSizeInBytes) {
       return NextResponse.json(
         { error: "File too large. Maximum size allowed is 10MB." },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -51,14 +53,14 @@ export async function POST(req: NextRequest) {
     const filename = `upload-${timestamp}.${fileExt || "png"}`;
 
     // Upload the file
-    const url = await uploadImageAssets(buffer, filename);
+    const url = await uploadImageAssets(buffer, filename, contentType);
 
     return NextResponse.json({ url });
   } catch (error) {
     console.error("Upload error:", error);
     return NextResponse.json(
       { error: "Failed to process upload" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

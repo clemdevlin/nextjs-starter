@@ -10,13 +10,17 @@ const s3 = new S3Client({
   forcePathStyle: false,
 });
 
-export const uploadImageAssets = async (buffer: Buffer, key: string) => {
+export const uploadImageAssets = async (
+  buffer: Buffer,
+  key: string,
+  contentType: string
+) => {
   await s3.send(
     new PutObjectCommand({
       Bucket: process.env.TIGRIS_STORAGE_BUCKET!,
       Key: key,
       Body: buffer,
-      ContentType: "image/*",
+      ContentType: contentType,
       ACL: "public-read", // optional if bucket is public
     })
   );
