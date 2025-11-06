@@ -268,7 +268,7 @@ export default function UploadPage() {
                 >
                   <div className="aspect-video relative bg-muted">
                     <Image
-                      src={file.url && URL.createObjectURL(file.url)}
+                      src={file.url}
                       alt={file.name}
                       fill
                       className="object-cover"
