@@ -1,4 +1,4 @@
-import { IconTrendingDown, IconTrendingUp } from "@tabler/icons-react";
+import { TrendingUp as IconTrendingUp, TrendingDown as IconTrendingDown } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import {
